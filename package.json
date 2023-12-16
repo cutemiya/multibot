@@ -1,0 +1,8 @@
+{
+  "name": "tg-multi-pidor",
+  "version": "1.0.0",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.64.0",
+    "pg": "^8.11.3"
+  }
+}
