@@ -11,7 +11,7 @@ const password = 'password'
 const createTgChat = `
     create table if not exists tgchat (
         id serial primary key,
-        company_id int references CompanyDetails(id),
+        company_id int references "CompanyDetails"(id),
         chat_id decimal not null
     ); 
 `

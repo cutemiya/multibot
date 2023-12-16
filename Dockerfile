@@ -9,4 +9,4 @@ RUN npm ci
 
 COPY ./multibot .
 
-CMD ["node", "script.js"]
+CMD ["node", "index.js"]
