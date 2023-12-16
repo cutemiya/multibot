@@ -5,7 +5,7 @@ WORKDIR /app
 COPY ./multibot/package.json ./
 COPY ./multibot/package-lock.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY ./multibot .
 
