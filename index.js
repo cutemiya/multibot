@@ -2,6 +2,11 @@ const TelegramBot = require('node-telegram-bot-api')
 
 const pg = require('pg')
 
+const host = 'database'
+const port = 5432
+const database = 'production'
+const user = 'fly_db_admin'
+const password = 'password'
 
 const createTgChat = `
     create table if not exists tgchat (
@@ -13,11 +18,11 @@ const createTgChat = `
 
 const runMigrate = async () => {
     const client = new pg.Client({
-        host: 'localhost',
-        port: 5431,
-        database: 'production',
-        user: 'postgres',
-        password: 'root',
+        host: host,
+        port: port,
+        database: database,
+        user: user,
+        password: password,
     })
     await client.connect()
     await client.query(createTgChat)
@@ -26,14 +31,11 @@ runMigrate()
 const tokens = ['6960608719:AAEKyvS0-mUDcF-cucRSvbd4UjrxZLjJfyc.1', '6707483063:AAGSh_BYFVKofIfzfH-cxkU80PohHD4q3fM.1']
 
 initBots = async () => {
-    let bots = []
-
     for (let token of tokens) {
         let companyId = token.split(".")[1]
         token = token.split(".")[0]
         let bot = new TelegramBot(token, {polling: true})
 
-        bots.push(bot)
         bot.on('new_chat_members', async (msg) => {
             const chatId = msg.chat.id
 
@@ -47,11 +49,11 @@ initBots = async () => {
 
 const check = async (chatId) => {
     const client = new pg.Client({
-        host: 'localhost',
-        port: 5431,
-        database: 'production',
-        user: 'postgres',
-        password: 'root',
+        host: host,
+        port: port,
+        database: database,
+        user: user,
+        password: password,
     })
     await client.connect()
     let res = await client.query(`select Count(*) from tgchat where chat_id = ${chatId}`)
@@ -61,11 +63,11 @@ const check = async (chatId) => {
 
 const insertOne = async (companyId, chatId) => {
     const client = new pg.Client({
-        host: 'localhost',
-        port: 5431,
-        database: 'production',
-        user: 'postgres',
-        password: 'root',
+        host: host,
+        port: port,
+        database: database,
+        user: user,
+        password: password,
     })
     await client.connect()
     await client.query(`insert into tgchat (company_id, chat_id) values(${companyId}, ${chatId})`)
