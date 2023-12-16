@@ -2,8 +2,8 @@ FROM node:20
 
 WORKDIR /app
 
-COPY package.json ./
-COPY package-lock.json ./
+COPY ./multibot/package.json ./
+COPY ./multibot/package-lock.json ./
 
 RUN npm install
 
